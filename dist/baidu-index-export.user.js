@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         百度指数导出
+// @name         百度指数数据导出工具
 // @namespace    http://tampermonkey.net/
 // @version      0.0.1
 // @author       siaikin

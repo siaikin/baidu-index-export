@@ -7,7 +7,7 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        name: '百度指数导出',
+        name: '百度指数数据导出工具',
         description: '这是一个 Tampermonkey 的脚本，用于将 baidu index 的数据导出为 csv',
         author: 'siaikin',
         copyright: 'https://github.com/siaikin',
