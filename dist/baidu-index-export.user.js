@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度指数数据导出工具
 // @namespace    http://tampermonkey.net/
-// @version      0.0.1
+// @version      1.1.0
 // @author       siaikin
 // @description  这是一个 Tampermonkey 的脚本，用于将 baidu index 的数据导出为 csv
 // @copyright    https://github.com/siaikin
