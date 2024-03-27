@@ -24,7 +24,7 @@
 
 # 使用
 
-查看视频教程: [B站](https://www.bilibili.com/video/BV1XK421e7LA)
+查看视频教程: [B站](https://www.bilibili.com/video/BV1XK421e7LA)，[Youtube](https://youtu.be/mRf_iPct4H0?si=WSqBzORWuOU4uR1p)
 
 安装脚本后，刷新页面，表格右上角会增加**下载**按钮。
 
