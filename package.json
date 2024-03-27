@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^23.0.6",
     "typescript": "^5.3.3",
     "vite": "^5.0.11",
     "vite-plugin-monkey": "^3.5.1"
