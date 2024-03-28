@@ -27,10 +27,7 @@ interface ChartData {
         Object.defineProperty(this, chartDataKey, {
           configurable: true,
           get: () => chartData,
-          set: (value) => {
-            chartData = value;
-            console.log(chartData)
-          }
+          set: (value) => chartData = value
         });
       }
     }
