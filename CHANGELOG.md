@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/siaikin/baidu-index-export/compare/v1.1.0...v1.1.1) (2024-03-28)
+
+
+### Bug Fixes
+
+* 删除日志打印 ([fd35f30](https://github.com/siaikin/baidu-index-export/commit/fd35f30c8201cedcbdccf2647275f1434850c478))
+
 # [1.1.0](https://github.com/siaikin/baidu-index-export/compare/v1.0.0...v1.1.0) (2024-03-27)
 
 

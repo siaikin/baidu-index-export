@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度指数数据导出工具
-// @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @namespace    https://github.com/siaikin/baidu-index-export
+// @version      1.1.1
 // @author       siaikin
 // @description  这是一个 Tampermonkey 的脚本，用于将 baidu index 的数据导出为 csv
 // @copyright    https://github.com/siaikin
@@ -28,10 +28,7 @@
           Object.defineProperty(this, chartDataKey, {
             configurable: true,
             get: () => chartData,
-            set: (value2) => {
-              chartData = value2;
-              console.log(chartData);
-            }
+            set: (value2) => chartData = value2
           });
         }
       }
