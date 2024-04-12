@@ -52,7 +52,7 @@ interface ChartData {
   }
 
   function exportCSV(chartData: ChartData) {
-    const titleRow = [''].concat(chartData.xAxisData);
+    const titleRow = ['name'].concat(chartData.xAxisData);
     const dataRows = chartData.series.map((item) => [`"${item.name}"`].concat(item.data));
 
     const csv: Array<string> = [titleRow.join(',') + '\n'];
@@ -64,7 +64,7 @@ interface ChartData {
   }
 
   function exportNewsCSV(chartData: ChartData) {
-    const titleRow = ['', 'date', 'newsDate', 'newsSource', 'newsTitle', 'newsUrl'];
+    const titleRow = ['name', 'date', 'newsDate', 'newsSource', 'newsTitle', 'newsUrl'];
 
     let dataRows: Array<Array<string>> = [];
     for (const [name, dateList] of Object.entries(chartData.newDatas)) {
