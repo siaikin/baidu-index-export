@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度指数数据导出工具
 // @namespace    https://github.com/siaikin/baidu-index-export
-// @version      1.1.1
+// @version      1.2.0
 // @author       siaikin
 // @description  这是一个 Tampermonkey 的脚本，用于将 baidu index 的数据导出为 csv
 // @copyright    https://github.com/siaikin
@@ -50,7 +50,7 @@
       exportNewsCSV(chartData.all);
     }
     function exportCSV(chartData2) {
-      const titleRow = [""].concat(chartData2.xAxisData);
+      const titleRow = ["name"].concat(chartData2.xAxisData);
       const dataRows = chartData2.series.map((item) => [`"${item.name}"`].concat(item.data));
       const csv = [titleRow.join(",") + "\n"];
       dataRows.forEach((row) => csv.push(row.join(",") + "\n"));
@@ -60,7 +60,7 @@
       );
     }
     function exportNewsCSV(chartData2) {
-      const titleRow = ["", "date", "newsDate", "newsSource", "newsTitle", "newsUrl"];
+      const titleRow = ["name", "date", "newsDate", "newsSource", "newsTitle", "newsUrl"];
       let dataRows = [];
       for (const [name, dateList] of Object.entries(chartData2.newDatas)) {
         const rows = dateList.map(({ xAxis, news }) => news.map((item) => [

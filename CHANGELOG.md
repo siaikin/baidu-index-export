@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/siaikin/baidu-index-export/compare/v1.1.1...v1.2.0) (2024-04-12)
+
+
+### Features
+
+* 关键字列的列名为 "name" ([372d0f3](https://github.com/siaikin/baidu-index-export/commit/372d0f3a8834d64ad26749c3d56ed9cc5c405b97))
+
 ## [1.1.1](https://github.com/siaikin/baidu-index-export/compare/v1.1.0...v1.1.1) (2024-03-28)
 
 
