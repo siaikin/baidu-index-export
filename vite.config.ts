@@ -17,6 +17,7 @@ export default defineConfig({
         match: [
           '*://index.baidu.com/*',
         ],
+        "run-at": "document-start",
       },
     }),
   ],
