@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/siaikin/baidu-index-export/compare/v1.2.0...v1.3.0) (2024-05-06)
+
+
+### Features
+
+* 支持导出品牌趋势和咨询指数数据 ([9b9656d](https://github.com/siaikin/baidu-index-export/commit/9b9656d85dc72b872468002396775f2bb21685d7))
+
 # [1.2.0](https://github.com/siaikin/baidu-index-export/compare/v1.1.1...v1.2.0) (2024-04-12)
 
 
