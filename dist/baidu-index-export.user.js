@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度指数数据导出工具
 // @namespace    https://github.com/siaikin/baidu-index-export
-// @version      1.3.0
+// @version      1.3.1
 // @author       siaikin
 // @description  这是一个 Tampermonkey 的脚本，用于将 baidu index 的数据导出为 csv
 // @copyright    https://github.com/siaikin
@@ -19,17 +19,18 @@
     ChartType2[ChartType2["BRAND"] = 1] = "BRAND";
     return ChartType2;
   })(ChartType || {});
-  function exportCSV(chartData) {
+  const BOM = new Uint8Array([239, 187, 191]);
+  function exportCSV(chartData, withBOM = false) {
     const titleRow = ["name"].concat(chartData.xAxisData);
     const dataRows = chartData.series.map((item) => [`"${item.name}"`].concat(item.data));
     const csv = [titleRow.join(",") + "\n"];
     dataRows.forEach((row) => csv.push(row.join(",") + "\n"));
     download(
-      new Blob(csv, { type: "text/csv" }),
+      new Blob(withBOM ? [BOM, ...csv] : csv, { type: "text/csv" }),
       `${chartData.series.map((item) => item.name).join(",")}_${chartData.startDate}-${chartData.endDate}.csv`
     );
   }
-  function exportNewsCSV(chartData) {
+  function exportNewsCSV(chartData, withBOM = false) {
     const titleRow = ["name", "date", "newsDate", "newsSource", "newsTitle", "newsUrl"];
     let dataRows = [];
     for (const [name, dateList] of Object.entries(chartData.newDatas)) {
@@ -46,7 +47,7 @@
     const csv = [titleRow.join(",") + "\n"];
     dataRows.forEach((row) => csv.push(row.join(",") + "\n"));
     download(
-      new Blob(csv, { type: "text/csv" }),
+      new Blob(withBOM ? [BOM, ...csv] : csv, { type: "text/csv" }),
       `${chartData.series.map((item) => item.name).join(",")}_${chartData.startDate}-${chartData.endDate}.news.csv`
     );
   }
@@ -60,7 +61,7 @@
     a.remove();
   }
   async function loadExportTrendFeature(chartDataKey) {
-    var _a, _b;
+    var _a, _b, _c, _d;
     let chartData = null;
     Object.defineProperty(
       Object.prototype,
@@ -92,21 +93,27 @@
     if (!splitline || !shareButton)
       return;
     const downloadButton = shareButton.cloneNode();
-    downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载</a>';
-    downloadButton.addEventListener("click", handleDownloadClick);
+    downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（无 BOM）</a>';
+    downloadButton.addEventListener("click", () => handleDownloadClick(false));
     (_a = shareButton.parentNode) == null ? void 0 : _a.append(splitline.cloneNode());
     (_b = shareButton.parentNode) == null ? void 0 : _b.append(downloadButton);
-    function handleDownloadClick() {
+    const downloadButtonWithBOM = shareButton.cloneNode();
+    downloadButtonWithBOM.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（带有 BOM，Excel可用）</a>';
+    downloadButtonWithBOM.addEventListener("click", () => handleDownloadClick(true));
+    (_c = shareButton.parentNode) == null ? void 0 : _c.append(splitline.cloneNode());
+    (_d = shareButton.parentNode) == null ? void 0 : _d.append(downloadButtonWithBOM);
+    function handleDownloadClick(withBOM = false) {
       if (!chartData) {
         console.error("[baidu-index-export] chartData is not ready");
+        alert("数据未准备好，请稍后再试");
         return;
       }
-      exportCSV(chartData.all);
-      exportNewsCSV(chartData.all);
+      exportCSV(chartData.all, withBOM);
+      exportNewsCSV(chartData.all, withBOM);
     }
   }
   async function loadExportFeedFeature(chartDataKey) {
-    var _a, _b;
+    var _a, _b, _c, _d;
     let chartData = null;
     Object.defineProperty(
       Object.prototype,
@@ -138,21 +145,27 @@
     if (!splitline || !regionButton)
       return;
     const downloadButton = regionButton.cloneNode();
-    downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载</a>';
-    downloadButton.addEventListener("click", handleDownloadClick);
+    downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（无 BOM）</a>';
+    downloadButton.addEventListener("click", () => handleDownloadClick(false));
     (_a = regionButton.parentNode) == null ? void 0 : _a.append(splitline.cloneNode());
     (_b = regionButton.parentNode) == null ? void 0 : _b.append(downloadButton);
-    function handleDownloadClick() {
+    const downloadButtonWithBOM = regionButton.cloneNode();
+    downloadButtonWithBOM.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（带有 BOM，Excel可用）</a>';
+    downloadButtonWithBOM.addEventListener("click", () => handleDownloadClick(true));
+    (_c = regionButton.parentNode) == null ? void 0 : _c.append(splitline.cloneNode());
+    (_d = regionButton.parentNode) == null ? void 0 : _d.append(downloadButtonWithBOM);
+    function handleDownloadClick(withBOM = false) {
       if (!chartData) {
         console.error("[baidu-index-export] chartData is not ready");
+        alert("数据未准备好，请稍后再试");
         return;
       }
-      exportCSV(chartData);
-      exportNewsCSV(chartData);
+      exportCSV(chartData, withBOM);
+      exportNewsCSV(chartData, withBOM);
     }
   }
   async function loadExportBrandFeature(chartDataKey) {
-    var _a, _b;
+    var _a, _b, _c, _d;
     let chartData = null;
     let pageThis = null;
     Object.defineProperty(
@@ -191,16 +204,22 @@
     if (!splitline || !shareButton)
       return;
     const downloadButton = shareButton.cloneNode();
-    downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载</a>';
-    downloadButton.addEventListener("click", handleDownloadClick);
+    downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（无 BOM）</a>';
+    downloadButton.addEventListener("click", () => handleDownloadClick(false));
     (_a = shareButton.parentNode) == null ? void 0 : _a.append(splitline.cloneNode());
     (_b = shareButton.parentNode) == null ? void 0 : _b.append(downloadButton);
-    function handleDownloadClick() {
+    const downloadButtonWithBOM = shareButton.cloneNode();
+    downloadButtonWithBOM.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（带有 BOM，Excel可用）</a>';
+    downloadButtonWithBOM.addEventListener("click", () => handleDownloadClick(true));
+    (_c = shareButton.parentNode) == null ? void 0 : _c.append(splitline.cloneNode());
+    (_d = shareButton.parentNode) == null ? void 0 : _d.append(downloadButtonWithBOM);
+    function handleDownloadClick(withBOM = false) {
       if (!chartData) {
         console.error("[baidu-index-export] chartData is not ready");
+        alert("数据未准备好，请稍后再试");
         return;
       }
-      exportCSV(chartData);
+      exportCSV(chartData, withBOM);
     }
   }
   const chartType = (() => {

@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/siaikin/baidu-index-export/compare/v1.3.0...v1.3.1) (2024-07-04)
+
+
+### Bug Fixes
+
+* 下载增加前缀 BOM 选项 ([83d0482](https://github.com/siaikin/baidu-index-export/commit/83d04820c27f4f9e8f8dc641e79b9a9b8d9dc879))
+
 # [1.3.0](https://github.com/siaikin/baidu-index-export/compare/v1.2.0...v1.3.0) (2024-05-06)
 
 
