@@ -35,19 +35,25 @@ export async function loadExportFeedFeature(chartDataKey: string) {
   if (!splitline || !regionButton) return;
 
   const downloadButton = regionButton.cloneNode() as Element;
-  downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载</a>';
-  downloadButton.addEventListener('click', handleDownloadClick);
-
+  downloadButton.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（无 BOM）</a>';
+  downloadButton.addEventListener('click', () => handleDownloadClick(false));
   regionButton.parentNode?.append(splitline.cloneNode());
   regionButton.parentNode?.append(downloadButton)
 
-  function handleDownloadClick() {
+  const downloadButtonWithBOM = regionButton.cloneNode() as Element;
+  downloadButtonWithBOM.innerHTML = '<a href="javascript:void(0)" class="share-icon">下载（带有 BOM，Excel可用）</a>';
+  downloadButtonWithBOM.addEventListener('click', () => handleDownloadClick(true));
+  regionButton.parentNode?.append(splitline.cloneNode());
+  regionButton.parentNode?.append(downloadButtonWithBOM)
+
+  function handleDownloadClick(withBOM = false) {
     if (!chartData) {
       console.error('[baidu-index-export] chartData is not ready');
+      alert('数据未准备好，请稍后再试')
       return;
     }
 
-    exportCSV(chartData);
-    exportNewsCSV(chartData);
+    exportCSV(chartData, withBOM);
+    exportNewsCSV(chartData, withBOM);
   }
 }
